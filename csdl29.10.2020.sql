@@ -126,25 +126,25 @@ VALUES('1','1','2029'),
 
 ===========================================================================
 
-1. Cho biết thông tin các công ty
+--1. Cho biết thông tin các công ty
 SELECT * FROM Company
 
 
 
-2. Cho biết tên nhân viên, sđt của công ty có địa chỉ ở 'London'
+--2. Cho biết tên nhân viên, sđt của công ty có địa chỉ ở 'London'
 SELECT Name, NumberofEmployee, Telephone FROM Company
 WHERE Address LIKE '%London%'
 
 
 
-3. Cho biết các công ty có số nhân viên >= 3000 và có trụ sở ở Tokyo
+--3. Cho biết các công ty có số nhân viên >= 3000 và có trụ sở ở Tokyo
 SELECT Name FROM Company
 WHERE NumberofEmployee >= 3000
 AND Address LIKE '%Tokyo%'
 
 
 
-4. cho biết công ty chưa cung ứng sản phẩm nào
+--4. cho biết công ty chưa cung ứng sản phẩm nào
 SELECT * FROM Company WHERE CompanyID NOT IN(
 SELECT CompanyID FROM Supply)
 
@@ -154,7 +154,7 @@ SELECT CompanyID FROM Supply)
 
 
 
-5. Cho biết công ty có cung ứng sản phầm màu 'red'
+--5. Cho biết công ty có cung ứng sản phầm màu 'red'
 SELECT Company.* FROM Company, Supply, Product
 WHERE Company.CompanyID = Supply.CompanyID
 AND Supply.ProductID = Product.ProductID
@@ -167,14 +167,14 @@ WHERE Color = 'red'
 
 
 
-6. Cho biết tổng số sản phẩm được cung ứng bởi công ty 'Audi'
+--6. Cho biết tổng số sản phẩm được cung ứng bởi công ty 'Audi'
 SELECT SUM(Quantity) FROM Company, Supply
 WHERE Company.CompanyID = Supply.CompanyID
 AND Name = 'Audi'
 
 
 
-7. Cho biết số loại sản phẩm được cung ứng bởi công ty 'Audi'
+--7. Cho biết số loại sản phẩm được cung ứng bởi công ty 'Audi'
 SELECT COUNT(s.ProductID) FROM Company c INNER JOIN Supply s
 ON c.CompanyID = s.CompanyID
 WHERE c.Name = 'Audi'
@@ -182,7 +182,7 @@ GROUP BY c.CompanyID
 
 
 
-8. Công ty nào cung ứng từ 3 loại sản phẩm trở lên
+--8. Công ty nào cung ứng từ 3 loại sản phẩm trở lên
 SELECT * FROM Company WHERE CompanyID IN(
 SELECT Company.CompanyID FROM Company JOIN Supply
 ON Company.CompanyID = Supply.CompanyID
@@ -194,11 +194,11 @@ GROUP BY CompanyID HAVING COUNT (ProductID) >= 3)
 
 
 
-9. Mã công ty nào cung ứng ít nhất 2 sản phẩm màu 'red'
+--9. Mã công ty nào cung ứng ít nhất 2 sản phẩm màu 'red'
 
 
 
-10. Mã công ty nào cung ứng tất cả các sản phẩm màu 'blue'
+--10. Mã công ty nào cung ứng tất cả các sản phẩm màu 'blue'
 SELECT CompanyID FROM Supply
 WHERE ProductID IN(SELECT ProductID FROM Product WHERE Color = 'blue')
 GROUP BY CompanyID HAVING COUNT(ProductID)
@@ -209,34 +209,34 @@ NOT EXISTS(SELECT ProductID FROM Product WHERE Color = 'blue'
 		   AND NOT EXISTS(SELECT ProductID FROM Supply WHERE Company.CompanyID = Supply.CompanyID
 						  AND Product.ProcductID = Supply.ProductID))
 
-11. Mã công ty nào chỉ cung ứng sản phẩm màu 'red'
+--11. Mã công ty nào chỉ cung ứng sản phẩm màu 'red'
 SELECT DISTINCT CompanyID FROM Supply
 WHERE CompanyID NOT IN(SELECT s2.CompanyID FROM Supply s2, Product p
 					   WHERE s2.ProductID = p.ProductID AND Color != 'red')
 
 
 
-12. Công ty nào kỷ niệm 100 năm thành lập trong năm nay
+--12. Công ty nào kỷ niệm 100 năm thành lập trong năm nay
 SELECT * FROM Company
 WHERE YEAR(EstablishmentDay) = YEAR(GETDATE()) - 100
 
 
 
-13. Công ty nào kỷ niệm 100 năm thành lập trong tháng này
+--13. Công ty nào kỷ niệm 100 năm thành lập trong tháng này
 SELECT * FROM Company
 WHERE YEAR(EstablishmentDay) = YEAR(GETDATE()) - 109
 AND MONTH(EstablishmentDay) = MONTH(GETDATE())
 
 
 
-14. Công ty nào cung ứng cả 2 loại sản phẩm 'red' và 'black'
+--14. Công ty nào cung ứng cả 2 loại sản phẩm 'red' và 'black'
 
 
 
 
-15. Công ty nào cung ứng tổng số lượng mặt hàng là lớn nhất
+--15. Công ty nào cung ứng tổng số lượng mặt hàng là lớn nhất
 
 
 
 
-16. Cho biết công ty chưa cung ứng sản phẩm nào
+--16. Cho biết công ty chưa cung ứng sản phẩm nào
