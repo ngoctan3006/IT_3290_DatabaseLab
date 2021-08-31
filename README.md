@@ -1,1 +1,1 @@
-# IT_3290_DatabaseLab
+Code Môn thực hành cơ sở dữ liệu
